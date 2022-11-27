@@ -276,12 +276,12 @@ void imprimirDatosAlumn() {
 	if (infile.is_open()) {
 		while (!infile.eof())
 		{
-			infile.getline(line, 500, ','); // read first line to first ','
+			infile.getline(line, 500, ','); //leer linea
 			for (i = 0; line[i] == search[i]; i++)
 			{
-				if (search[i] == '\0') // if true search and line is same
+				if (search[i] == '\0') // Buscar info
 				{
-					// print all info
+					// imprimir info
 					cout << "Datos:" << endl;
 					cout << "ID:" << " " << line << endl;
 					infile.getline(line, 500, ',');
@@ -304,9 +304,9 @@ void imprimirDatosAlumn() {
 				
 				}
 			}
-			// no match
-			for (int j = 0; j < 3; j++) infile.getline(line, 500, ','); // skip the line
-			infile.getline(line, 500, '\n'); // we reach end of line
+			// No encontro
+			for (int j = 0; j < 3; j++) infile.getline(line, 500, ',');
+			infile.getline(line, 500, '\n'); 
 			
 			
 		}
@@ -328,12 +328,12 @@ void imprimirDatosProf() {
 	if (infile.is_open()) {
 		while (!infile.eof())
 		{
-			infile.getline(line, 500, ','); // read first line to first ','
+			infile.getline(line, 500, ','); //leer linea
 			for (i = 0; line[i] == search[i]; i++)
 			{
-				if (search[i] == '\0') // if true search and line is same
+				if (search[i] == '\0') // Buscar info
 				{
-					// print all info
+					// imprimir info
 					cout << "Datos:" << endl;
 					cout << "ID:" << " " << line << endl;
 					infile.getline(line, 500, ',');
@@ -355,9 +355,9 @@ void imprimirDatosProf() {
 				
 			}
 		}
-		// no match
-		for (int j = 0; j < 3; j++) infile.getline(line, 500, ','); // skip the line
-		infile.getline(line, 500, '\n'); // we reach end of line
+		// no encontro
+		for (int j = 0; j < 3; j++) infile.getline(line, 500, ','); 
+		infile.getline(line, 500, '\n'); 
 
 
 	}
@@ -380,12 +380,12 @@ void imprimirDatosMatr() {
 	if (infile.is_open()) {
 		while (!infile.eof())
 		{
-			infile.getline(line, 500, ','); // read first line to first ','
+			infile.getline(line, 500, ','); //leer linea
 			for (i = 0; line[i] == search[i]; i++)
 			{
-				if (search[i] == '\0') // if true search and line is same
+				if (search[i] == '\0') // Buscar info
 				{
-					// print all info
+					// imprimir info
 					cout << "Datos:" << endl;
 					cout << "IdMateria:" << " " << line << endl;
 					infile.getline(line, 500, ',');
@@ -401,9 +401,9 @@ void imprimirDatosMatr() {
 				
 			}
 		}
-		// no match
-		for (int j = 0; j < 3; j++) infile.getline(line, 500, ','); // skip the line
-		infile.getline(line, 500, '\n'); // we reach end of line
+		// no encontro
+		for (int j = 0; j < 3; j++) infile.getline(line, 500, ','); 
+		infile.getline(line, 500, '\n'); 
 
 
 	}
