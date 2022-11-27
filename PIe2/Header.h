@@ -1,9 +1,11 @@
 #include<iostream>
 #include<fstream>
+#include<ostream>
 using namespace std;
-ofstream MyFile("Alumnos.txt");
-ofstream MyFile2("Materia.txt");
-ofstream MyFile3("Profesores.txt");
+char line[500];
+char search[20];
+int i;
+ofstream infile;
 
 //CLASE DATOSGENERALES//---------------------------------------------------------------------------------------------------------------------------------
 
@@ -22,24 +24,51 @@ DatosGenerales::DatosGenerales() {
 
 	cout << "Ingresar Id:";
 	cin >> Id;
+	while (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Escriba un numero: ";
+		cin >> Id;
+	}
 	cout << "Ingresar nombre:";
 	cin >> nombre;
+	while (!isalpha(nombre[0])) {
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Solo Letras,reingrese el dato: " << endl;
+		cin >> nombre;
+	}
 	cout << "Ingresarapellido:";
 	cin >> apellido;
+	while (!isalpha(apellido[0])) {
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Solo Letras, reingrese el dato: " << endl;
+		cin >> apellido;
+	}
 	nombre_apellido = nombre + " " + apellido;
 	cout << "Sexo:";
 	cin >> sexo;
+	while (!isalpha(sexo[0])) {
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Solo Letras,reingrese el dato: " << endl;
+		cin >> sexo;
+	}
 	cout << "Edad:";
 	cin >> edad;
+	while (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Escriba un numero: ";
+		cin >> edad;
+	}
 
 }
 void DatosGenerales::imprimirDatos() {
 	cout << "Id:";
 	int Id;
 	cout << "Nombre Completo:";
-	std::string nombre_apellido;
+	string nombre_apellido;
 	cout << "Sexo:";
-	std::string sexo;
+	string sexo;
 	cout << "Edad:";
 	cin >> edad;
 
@@ -69,29 +98,41 @@ Alumnos::Alumnos() {
 	
 	cout << "Ingresar número de control escolar:";
 	cin >> ctrlescolar;
+	while (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Escriba un numero: ";
+		cin >> ctrlescolar;
+	}
 	cout << "Ingresar semestre:";
 	cin >> semestre;
+	while (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Escriba un numero: ";
+		cin >> semestre;
+	}
 	cout << "Ingresar materias:";
 	cin >> materias;
+	while (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Escriba un numero: ";
+		cin >> materias;
+	}
 	
 }
 void Alumnos::getdatos() {
-	ofstream Myfile;
-	Myfile.open("Alumnos.txt", ios::out);
-	MyFile << Id <<" "<<nombre_apellido<< " " << sexo<<" " << edad << " " << ctrlescolar << " " << semestre << " " << materias << endl;
-	MyFile.close();
+	ofstream infile;
+	infile.open("Alumnos.txt", ios_base::app);
+	infile << Id << "," << nombre_apellido << "," << sexo << "," << edad << "," << ctrlescolar << "," << semestre << "," << materias << endl;
+	infile.close();
 }
 void Alumnos::imprimirDatos() {
-	cout << "Id de alumno:";
-	cout << Id;
-	cout << "Número de control escolar del alumno:";
-	cout << ctrlescolar;
-	cout << "Semestre que cursa el alumno:";
-	cout << semestre;
-	cout << "Materia que cursa el alumno:";
-	cout << materias;
 
+   
 }
+
 Alumnos::~Alumnos() {
 
 }
@@ -102,7 +143,7 @@ public:
 
 	string tituprofe;
 	int cedula;
-	int materia;
+	string materia;
 
 
 	void getdatos();
@@ -115,17 +156,33 @@ Profesores::Profesores() {
 	
 	cout << "Ingresar titulo o profesion del profesor:";
 	cin >> tituprofe;
+	while (!isalpha(nombre[0])) {
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Solo Letras,reingrese el dato: " << endl;
+		cin >> tituprofe;
+	}
 	cout << "Ingresar número de cédula profesional:";
 	cin >> cedula;
+	while (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Escriba un numero: ";
+		cin >> cedula;
+	}
 	cout << "Ingresar materia:";
 	cin >> materia;
+	while (!isalpha(materia[0])) {
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Solo Letras,reingrese el dato: " << endl;
+		cin >> materia;
+	}
 
 }
 void Profesores::getdatos() {
-	ofstream Myfile3;
-	Myfile3.open("Profesores.txt", ios::out);
-	MyFile3 << Id << " " << nombre_apellido << " " << sexo << " " << edad << " " << tituprofe << " " << cedula << " " << materia << endl;
-	MyFile3.close();
+	ofstream infile;
+	infile.open("Profesores.txt", ios_base::app);
+	infile << Id << "," << nombre_apellido << "," << sexo << "," << edad << "," << tituprofe << "," << cedula << "," << materia << endl;
+	infile.close();
 }
 void Profesores::imprimirDatos() {
 	cout << "Id del profesor:";
@@ -158,31 +215,204 @@ public:
 Materia::Materia() {
 	cout << "Ingresar Id de la materia:";
 	cin >> IdMateria;
+	while (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Escriba un numero: ";
+		cin >> IdMateria;
+	}
 	cout << "Ingresar materia:";
 	cin >> materia;
+	while (!isalpha(materia[0])) {
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Solo Letras,reingrese el dato: " << endl;
+		cin >> materia;
+	}
 	cout << "Ingresar creditos:";
 	cin >> creditos;
+	while (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Escriba un numero: ";
+		cin >> creditos;
+	}
 	cout << "Ingresar nombre del profesor:";
 	cin >> profesor;
+	while (!isalpha(profesor[0])) {
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Solo Letras,reingrese el dato: " << endl;
+		cin >> profesor;
+	}
 
 }
 void Materia::getdatos() {
-	ofstream Myfile2;
-	Myfile2.open("Profesores.txt", ios::out);
-	MyFile2 << IdMateria << " " << materia << " " << creditos << " " << profesor << endl;
-	MyFile2.close();
+	ofstream infile;
+	infile.open("Materia.txt", ios_base::app);
+	infile << IdMateria << "," << materia << "," << creditos << "," << profesor << endl;
+	infile.close();
 }
 void Materia::imprimirDatos() {
 	cout << "Id de la materia:";
 	cin >> IdMateria;
 	cout << "Materia:";
-	std::string materia;
+	string materia;
 	cout << "Numero de creditos:";
 	cin >> creditos;
 	cout << "Nombre del profesor:";
-	std::string profesor;
+	string profesor;
 
 }
 Materia::~Materia() {
+
+}
+
+void imprimirDatosAlumn() {
+	
+
+	ifstream infile;
+	infile.open("Alumnos.txt");
+	cout << "\n 2. Escribe el ID de alumno" << endl;;
+	cin >> search;
+	if (infile.is_open()) {
+		while (!infile.eof())
+		{
+			infile.getline(line, 500, ','); // read first line to first ','
+			for (i = 0; line[i] == search[i]; i++)
+			{
+				if (search[i] == '\0') // if true search and line is same
+				{
+					// print all info
+					cout << "Datos:" << endl;
+					cout << "ID:" << " " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Nombre del alumno: " << " " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Sexo: " << " " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Edad: " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "No. De Control escolar: " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "semestre: " << line << endl;
+					infile.getline(line, 500, '\n');
+					cout << "No. de materias " << " " << line << endl;
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					break;
+				}
+				
+				
+				}
+			}
+			// no match
+			for (int j = 0; j < 3; j++) infile.getline(line, 500, ','); // skip the line
+			infile.getline(line, 500, '\n'); // we reach end of line
+			
+			
+		}
+		
+	else
+	{
+		cout << "Id no existe" << endl;
+	}
+	infile.close();
+
+}
+void imprimirDatosProf() {
+
+
+	ifstream infile;
+	infile.open("Profesores.txt");
+	cout << "\n 2. Escribe el ID de Profesor" <<endl;
+	cin >> search;
+	if (infile.is_open()) {
+		while (!infile.eof())
+		{
+			infile.getline(line, 500, ','); // read first line to first ','
+			for (i = 0; line[i] == search[i]; i++)
+			{
+				if (search[i] == '\0') // if true search and line is same
+				{
+					// print all info
+					cout << "Datos:" << endl;
+					cout << "ID:" << " " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Nombre del alumno: " << " " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Sexo: " << " " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Edad: " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Titulo: " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Cedula: " << line << endl;
+					infile.getline(line, 500, '\n');
+					cout << "Materia que imparte: " << " " << line << endl;
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					break;
+				}
+				
+			}
+		}
+		// no match
+		for (int j = 0; j < 3; j++) infile.getline(line, 500, ','); // skip the line
+		infile.getline(line, 500, '\n'); // we reach end of line
+
+
+	}
+
+
+	else
+	{
+		cout << "Id no existe" << endl;
+	}
+	infile.close();
+
+}
+void imprimirDatosMatr() {
+
+
+	ifstream infile;
+	infile.open("Materia.txt");
+	cout << "\n 2. Escribe el ID de la Materia" << endl;
+	cin >> search;
+	if (infile.is_open()) {
+		while (!infile.eof())
+		{
+			infile.getline(line, 500, ','); // read first line to first ','
+			for (i = 0; line[i] == search[i]; i++)
+			{
+				if (search[i] == '\0') // if true search and line is same
+				{
+					// print all info
+					cout << "Datos:" << endl;
+					cout << "IdMateria:" << " " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Nombre de la materia: " << " " << line << endl;
+					infile.getline(line, 500, ',');
+					cout << "Creditos de la materia: " << " " << line << endl;
+					infile.getline(line, 500, '\n');
+					cout << "Profesor de la materia: " << line << endl;
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					break;
+				}
+				
+			}
+		}
+		// no match
+		for (int j = 0; j < 3; j++) infile.getline(line, 500, ','); // skip the line
+		infile.getline(line, 500, '\n'); // we reach end of line
+
+
+	}
+
+
+	else
+	{
+		cout << "Id no existe" << endl;
+	}
+	infile.close();
 
 }
